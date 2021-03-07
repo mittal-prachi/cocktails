@@ -7,33 +7,8 @@
   background: #eee;
 
   .mat-sidenav {
-    min-width: 250px;
-  }
-}
-
-.filter-tree {
-  ul {
-    margin-top: 10px;
-    margin-bottom: 0;
-    list-style-type: none;
-
-    &.parent-node {
-      padding-left: 0;
-    }
-
-    .children-tree-invisible {
-      display: none;
-    }
-  }
-
-  li {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style-type: none;
-  }
-
-  .leaf-node {
-    padding-left: 25px;
+    width: 250px;
+    padding-top: 20px;
   }
 }
 
@@ -62,6 +37,16 @@ mat-card {
     font-size: 0.75vw;
     text-align: center;
   }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.search-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

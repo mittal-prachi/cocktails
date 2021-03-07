@@ -4,8 +4,8 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Search/Filter By</mat-label>
-        <mat-select [(ngModel)]="selectedOption" (selectionChange)="searchBy=null">
-          <mat-option *ngFor="let option of FilterOptions" [value]="option">
+        <mat-select [(ngModel)]="selectedOption" (selectionChange)="selectionChange($event)">
+          <mat-option *ngFor="let option of filterOptions" [value]="option">
             {{option.type}}
           </mat-option>
         </mat-select>
@@ -17,32 +17,32 @@
       <mat-form-field appearance="fill" *ngSwitchCase="Filter.Alcoholic">
         <mat-label>Filter by Alcoholic</mat-label>
         <mat-select [(ngModel)]="searchBy">
-          <mat-option *ngFor="let option of filters.alcoholic" [value]="option.name">
-            {{option.name}}
+          <mat-option *ngFor="let option of filters.alcoholic" [value]="option">
+            {{option}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill" *ngSwitchCase="Filter.Categories">
         <mat-label>Filter by Category</mat-label>
         <mat-select [(ngModel)]="searchBy">
-          <mat-option *ngFor="let option of filters.categories" [value]="option.name">
-            {{option.name}}
+          <mat-option *ngFor="let option of filters.categories" [value]="option">
+            {{option}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill" *ngSwitchCase="Filter.Ingredients">
         <mat-label>Filter by Ingredient</mat-label>
         <mat-select [(ngModel)]="searchBy">
-          <mat-option *ngFor="let option of filters.ingredients" [value]="option.name">
-            {{option.name}}
+          <mat-option *ngFor="let option of filters.ingredients" [value]="option">
+            {{option}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill" *ngSwitchCase="Filter.Glasses">
         <mat-label>Filter by Glass</mat-label>
         <mat-select [(ngModel)]="searchBy">
-          <mat-option *ngFor="let option of filters.glasses" [value]="option.name">
-            {{option.name}}
+          <mat-option *ngFor="let option of filters.glasses" [value]="option">
+            {{option}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -55,74 +55,30 @@
         <input matInput placeholder="Search by first letter" [(ngModel)]="searchBy">
       </mat-form-field>
     </div>
-    <div>
-      <button mat-button (click)="getData()">Search</button>
-    </div>
-
-
-
-    <div class="filter-tree">
-      <ul class="parent-node">
-        <li *ngFor="let parent of filterTree">
-          <div class="mat-tree-node">
-            <button mat-icon-button (click)="parent.expanded = !parent.expanded"
-                    [attr.aria-label]="'Toggle ' + parent.name">
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{parent.expanded ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            <mat-checkbox class="checklist-leaf-node"
-                          [checked]="parent.selected"
-                          [indeterminate]="checkIndeterminate(parent)"
-                          (change)="itemToggle(parent)">{{parent.name}}</mat-checkbox>
-          </div>
-          <ul [class.children-tree-invisible]="!parent.expanded">
-            <li class="mat-tree-node leaf-node" *ngFor="let node of parent.children">
-              <mat-checkbox class="checklist-leaf-node"
-                            [checked]="node.selected"
-                            (change)="leafItemToggle(node)">{{node.name}}</mat-checkbox>
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <div class="search-button-container">
+      <button mat-raised-button (click)="getData()" color="primary" >Search</button>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-
-    <ng-template #content>
-      <ng-container class="wrapper" *ngFor="let cocktail of cocktails">
-        <div>
-          <div class="heading"><strong>{{cocktail.title}}</strong></div>
-          <mat-divider></mat-divider>
-
-         <!-- <mat-paginator
-            [length]='paginatorLength'
-            [pageIndex]='paginatorPageIndex'
-            pageSize=1
-            (page)='OnPageChange($event)'
-          >
-          </mat-paginator>-->
 
 
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
-        </div>
-      </ng-container>
-    </ng-template>
+    <ng-container *ngIf="cocktails$ | async as cocktails">
+      <mat-grid-list cols='5' rowHeight='5:6' gutterSize='1vw'>
+        <mat-grid-tile *ngFor="let cocktail of cocktails">
+          <mat-card>
+            <div class="img-container">
+              <img mat-card-sm-image src="{{cocktail.strDrinkThumb}}" alt="">
+            </div>
+            <mat-card-content>
+              <div> {{cocktail.strDrink}} </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-container>
 
-
-    <mat-grid-list cols='5' rowHeight='5:6' gutterSize='1vw'>
-      <mat-grid-tile *ngFor="let cocktail of cocktails$ | async">
-        <mat-card>
-          <div class="img-container">
-            <img mat-card-sm-image src="{{cocktail.strDrinkThumb}}" alt="">
-          </div>
-          <mat-card-content>
-            <div> {{cocktail.strDrink}} </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
