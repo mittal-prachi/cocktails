@@ -1,0 +1,67 @@
+.sidenav-container {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+
+  .mat-sidenav {
+    min-width: 250px;
+  }
+}
+
+.filter-tree {
+  ul {
+    margin-top: 10px;
+    margin-bottom: 0;
+    list-style-type: none;
+
+    &.parent-node {
+      padding-left: 0;
+    }
+
+    .children-tree-invisible {
+      display: none;
+    }
+  }
+
+  li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+
+  .leaf-node {
+    padding-left: 25px;
+  }
+}
+
+
+.mat-grid-list {
+  margin: 20px;
+}
+
+mat-card {
+  width: 20vw;
+
+  .img-container {
+    height: 80%;
+    width: 100%;
+    padding-bottom: 1vh;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+
+  mat-card-content {
+    height: 20%;
+    width: 100%;
+    font-size: 0.75vw;
+    text-align: center;
+  }
+}
+
+
