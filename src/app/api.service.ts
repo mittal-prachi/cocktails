@@ -29,4 +29,13 @@ export class ApiService {
     return this.http.get<any>(api, {params}).pipe(map(data => data.drinks));
   }
 
+  getDrinkById(id) {
+    const params = new HttpParams({
+      fromObject: {
+        i: id
+      }
+    });
+    return this.http.get<any>('/lookup.php', {params}).pipe(map(data => data.drinks[0]));
+  }
+
 }

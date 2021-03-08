@@ -56,7 +56,7 @@
       </mat-form-field>
     </div>
     <div class="search-button-container">
-      <button mat-raised-button (click)="getData()" color="primary" >Search</button>
+      <button mat-raised-button (click)="getData()" color="primary">Search</button>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -67,14 +67,16 @@
     <ng-container *ngIf="cocktails$ | async as cocktails">
       <mat-grid-list cols='5' rowHeight='5:6' gutterSize='1vw'>
         <mat-grid-tile *ngFor="let cocktail of cocktails">
-          <mat-card>
+          <mat-card (click)="openDrinkDetails(cocktail)">
             <div class="img-container">
               <img mat-card-sm-image src="{{cocktail.strDrinkThumb}}" alt="">
             </div>
             <mat-card-content>
               <div> {{cocktail.strDrink}} </div>
             </mat-card-content>
+            <mat-spinner *ngIf="cocktail.loading" [strokeWidth]="10" [diameter]="100"></mat-spinner>
           </mat-card>
+
         </mat-grid-tile>
       </mat-grid-list>
     </ng-container>

@@ -5,6 +5,8 @@ import { Filter } from '../types/filter';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MatSelectChange } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { DrinkDetailComponent } from '../drink-detail/drink-detail.component';
 
 @Component({
   selector: 'app-drink-list',
@@ -51,6 +53,7 @@ export class DrinkListComponent implements OnInit {
   loading = false;
 
   constructor(private apiService: ApiService,
+              private dialogService: MatDialog,
               private route: ActivatedRoute) {
   }
 
@@ -88,6 +91,23 @@ export class DrinkListComponent implements OnInit {
         this.searchBy = null;
         break;
     }
+  }
+
+  openDrinkDetails(cocktail) {
+    if (cocktail.loading) {
+      return;
+    }
+    cocktail.loading = true;
+    this.apiService.getDrinkById(cocktail.idDrink).subscribe(item => {
+      cocktail.loading = false;
+      const dialogRef = this.dialogService.open(DrinkDetailComponent, {
+        width: '400px',
+        data: item
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    });
   }
 
 }

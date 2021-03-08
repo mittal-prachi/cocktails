@@ -17,11 +17,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DrinkListComponent
+    DrinkListComponent,
+    DrinkDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
     FormsModule
   ],
   providers: [

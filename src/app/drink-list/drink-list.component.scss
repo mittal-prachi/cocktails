@@ -17,8 +17,10 @@
   margin: 20px;
 }
 
-mat-card {
+.mat-card {
   width: 20vw;
+  min-height: 81%;
+  cursor: pointer;
 
   .img-container {
     height: 80%;
@@ -36,6 +38,12 @@ mat-card {
     width: 100%;
     font-size: 0.75vw;
     text-align: center;
+  }
+
+  .mat-spinner {
+    position: absolute;
+    top: 25%;
+    left:25%
   }
 }
 
