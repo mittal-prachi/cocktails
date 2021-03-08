@@ -1,5 +1,7 @@
 # Cocktails
 
+Demo Link: https://mittal-prachi.github.io/cocktails/
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
 ## Development server
